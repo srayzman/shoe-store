@@ -40,7 +40,7 @@ variable "cc_cloud_provider" {
 
 variable "cc_cloud_region" {
   type    = string
-  default = "eu-central-1"
+  default = "ap-southeast-2"
 }
 
 variable "cc_env_name" {

@@ -33,7 +33,7 @@ We will deploy with terraform:
 - Create API Key in Confluent Cloud via CLI:
     ```bash
     confluent login
-    confluent api-key create --resource cloud --description "API for terraform"
+    confluent api-key create --resource cloud --description "API Flink handson for terraform"
     # It may take a couple of minutes for the API key to be ready.
     # Save the API key and secret. The secret is not retrievable later.
     #+------------+------------------------------------------------------------------+
@@ -98,10 +98,14 @@ Go to the Confluent Console via the url [https://confluent.cloud/settings/api-ke
 cat > $PWD/terraform/terraform.tfvars <<EOF
 confluent_cloud_api_key = "{Confluent Cloud API Key}"
 confluent_cloud_api_secret = "{Confluent Cloud API Key Secret}"
-cc_cloud_provider = "{the_selected_cloud_provider}"
-cc_cloud_region= "{the_selected_region_of_the_confluent_cloud}"
+cc_cloud_provider = "AWS"
+cc_cloud_region= "ap-southeast-2"
+sr_cloud_provider = "AWS"
+sr_cloud_region= "ap-southeast-2"
 EOF
 ```
+
+Optionally use CONFLUENT_CLOUD_API_KEY and CONFLUENT_CLOUD_API_SECRET environment variables 
 
 ### Optional: Prefix your resources
 
@@ -119,7 +123,7 @@ run the following commands:
 cd ./terraform
 terraform init
 terraform plan
-terraform apply
+terraform apply -auto-approve
 # Apply shows you what will be provision, enter yes to continue provisioning 
 terraform output -json
 # for sensitive data
@@ -145,7 +149,7 @@ You are ready to [start with LAB1](../lab1.md)
 
 # Destroy the hands.on infrastructure
 ```bash
-terraform destroy
+RESPONSE=1; while [ $RESPONSE -eq 1 ]; do terraform destroy -auto-approve; RESPONSE=$?; done
 ```
 There could be a conflict destroying everything with our Tags. In this case destroy again via terraform.
 ```bash
@@ -160,5 +164,5 @@ There could be a conflict destroying everything with our Tags. In this case dest
 #│ 
 #╵
 # destroy again
-terraform destroy
+terraform destroy -auto-approve
 ``` 
