@@ -95,17 +95,16 @@ Go to the Confluent Console via the url [https://confluent.cloud/settings/api-ke
 - Add your API key to the Terraform variables by creating a tfvars file
 
 ```bash
+export TF_VAR_confluent_cloud_api_key="{Confluent Cloud API Key}"
+export TF_VAR_confluent_cloud_api_secret="{Confluent Cloud API Key Secret}"
+
 cat > $PWD/terraform/terraform.tfvars <<EOF
-confluent_cloud_api_key = "{Confluent Cloud API Key}"
-confluent_cloud_api_secret = "{Confluent Cloud API Key Secret}"
 cc_cloud_provider = "AWS"
 cc_cloud_region= "ap-southeast-2"
 sr_cloud_provider = "AWS"
 sr_cloud_region= "ap-southeast-2"
 EOF
 ```
-
-Optionally use CONFLUENT_CLOUD_API_KEY and CONFLUENT_CLOUD_API_SECRET environment variables 
 
 ### Optional: Prefix your resources
 
